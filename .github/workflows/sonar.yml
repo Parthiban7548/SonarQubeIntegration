@@ -19,5 +19,5 @@ jobs:
           args: >
             -Dsonar.projectKey=SonarTest
             -Dsonar.sources=src
-            -Dsonar.host.url=http://localhost:9000
-            -Dsonar.login=sqp_8a71677e5ebea449ec83fbec408fff4452f29d9b
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
