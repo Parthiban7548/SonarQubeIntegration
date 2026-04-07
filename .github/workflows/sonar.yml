@@ -10,14 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - run: npm install
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
 
-      - uses: sonarsource/sonarqube-scan-action@v2
+      # Run SonarQube Scan
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v2
         with:
           args: >
             -Dsonar.projectKey=SonarTest
             -Dsonar.sources=src
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+      # IMPORTANT: Fail build if issues (Quality Gate)
+      - name: Check Quality Gate
+        uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

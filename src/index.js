@@ -3,17 +3,17 @@ import express from "express";
 const app = express();
 
 // ❌ using var (bad practice)
-var count: any = 0;
+var count = 0;
 
 // ❌ unused variable
 let unusedVar = "I am not used";
 
 // ❌ duplicate function
-function greet(name: string) {
+function greet(name) {
   console.log("Hello " + name);
 }
 
-function greetDuplicate(name: string) {
+function greetDuplicate(name) {
   console.log("Hello " + name); // duplicate logic
 }
 
@@ -23,7 +23,7 @@ if (count == "0") {
 }
 
 // ❌ function with too many responsibilities
-function processData(data: any) {
+function processData(data) {
   console.log("Processing data...");
   if (data) {
     console.log("Data exists");
