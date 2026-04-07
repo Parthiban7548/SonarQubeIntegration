@@ -18,8 +18,6 @@ function processData(data) {
   }
 }
 
-// ❌ remove hardcoded password
-// const password = "123456";
 
 app.get("/", (req, res) => {
   greet("Parthi");
