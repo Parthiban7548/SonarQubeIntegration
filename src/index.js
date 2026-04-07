@@ -2,32 +2,24 @@ import express from "express";
 
 const app = express();
 
+let count = 0;
 
-
-// ❌ duplicate function
 function greet(name) {
-  console.log("Hello " + name);
+  console.log(`Hello ${name}`);
 }
 
-
-// ❌ bad comparison
-if (count == "0") {
+if (count === 0) {
   console.log("Count is zero");
 }
 
-// ❌ function with too many responsibilities
 function processData(data) {
-  console.log("Processing data...");
   if (data) {
-    console.log("Data exists");
-  }
-  if (data) {
-    console.log("Data exists again"); // duplicate condition
+    console.log("Processing data...");
   }
 }
 
-// ❌ hardcoded credentials (security issue)
-const password = "123456";
+// ❌ remove hardcoded password
+// const password = "123456";
 
 app.get("/", (req, res) => {
   greet("Parthi");
