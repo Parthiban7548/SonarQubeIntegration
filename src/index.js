@@ -2,36 +2,32 @@ import express from "express";
 
 const app = express();
 
+const PORT = 3000;
 let count = 0;
-let unusedVar = 123; // unused variable
 
+// Use template literals properly
 function greet(name) {
-  console.log("Hello " + name); // not using template literals
+  console.log(`Hello ${name}`);
 }
 
-if (count = 0) { // assignment instead of comparison
+// Proper comparison
+if (count === 0) {
   console.log("Count is zero");
 }
 
+// Avoid duplicate conditions
 function processData(data) {
   if (data > 0 && data < 100) {
     console.log("Valid data");
   } else {
     console.log("Invalid data");
   }
-
-  if (data > 0 && data < 100) { // duplicate condition
-    console.log("Duplicate check");
-  }
 }
 
+// Clean condition check
 function checkData(data) {
-  if (data == true) { // loose equality
+  if (data !== null && data !== undefined) {
     console.log("Data exists");
-  }
-
-  if (data) {
-    console.log("Data exists"); // duplicate logic
   }
 }
 
@@ -41,20 +37,10 @@ app.get("/", (req, res) => {
   processData(count);
   checkData(count);
 
-  let temp = 5;
-  temp = temp; // useless assignment
-
-  if (true) { // always true condition
-    console.log("Always runs");
-  }
-
   res.send("Hello SonarQube");
-
-  console.log("After response"); // unreachable / bad practice
 });
 
-app.listen(3000, () => {
-  console.log("Server started");
+// Single listen with callback
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
-
-app.listen(3000); // duplicate listen
