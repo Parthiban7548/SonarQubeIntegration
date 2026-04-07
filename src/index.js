@@ -1,73 +1,62 @@
-import express, { Request, Response } from "express";
+import express from "express";
 
 const app = express();
 
+// bad practice (var)
+var count: any = 0;
 
-let count = 0;
+// unused variable
+let unused = "not used";
 
-
-function greet(name) {
-  console.log(`Hello ${name}`);
+// duplicate code
+function greet(name: string) {
+  console.log("Hello " + name);
 }
 
-if (count === 0) {
+function greet2(name: string) {
+  console.log("Hello " + name);
+}
+
+// wrong comparison
+if (count == "0") {
   console.log("Count is zero");
 }
 
-
-function processData(data) {
-  if (data > 0 && data < 100) {
-    console.log("Valid data");
+// nested condition (complex)
+function processData(data: any) {
+  if (data) {
+    if (data > 0) {
+      if (data < 100) {
+        console.log("Valid");
+      }
+    }
   }
 }
 
-
-function checkData(data ) {
+// duplicate condition
+function checkData(data: any) {
   if (data) {
     console.log("Data exists");
   }
-}
-
-
-const password = process.env.APP_PASSWORD || "";
-
-
-try {
-  throw new Error("Test error");
-} catch (e) {
-  console.error("Error occurred:", e);
-}
-
-
-function logData(data) {
-  console.log(data);
-}
-
-function validateData(data) {
-  if (data > 10) console.log("greater");
-  if (data < 5) console.log("smaller");
-}
-
-function printNumbers() {
-  for (let i = 0; i < 10; i++) {
-    console.log(i);
+  if (data) {
+    console.log("Data exists again");
   }
 }
 
+// hardcoded secret
+const password = "123456";
+
+// empty catch
+try {
+  throw new Error("error");
+} catch (e) {}
 
 app.get("/", (req, res) => {
-  greet("Parthi");
+  greet("test");
+  greet2("test");
   processData(count);
   checkData(count);
-
-  logData(count);
-  validateData(count);
-  printNumbers();
-
-  res.send("Hello SonarQube");
+  res.send("Hello");
 });
 
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+app.listen(3000);
