@@ -2,45 +2,61 @@ import express from "express";
 
 const app = express();
 
-const PORT = 3000;
-let count = 0;
+// ❌ bad practice (var)
+var count: any = 0;
 
-// Use template literals properly
-function greet(name) {
-  console.log(`Hello ${name}`);
+// ❌ unused variable
+let unused = "not used";
+
+// ❌ duplicate code
+function greet(name: string) {
+  console.log("Hello " + name);
 }
 
-// Proper comparison
-if (count === 0) {
+function greet2(name: string) {
+  console.log("Hello " + name);
+}
+
+// ❌ wrong comparison
+if (count == "0") {
   console.log("Count is zero");
 }
 
-// Avoid duplicate conditions
-function processData(data) {
-  if (data > 0 && data < 100) {
-    console.log("Valid data");
-  } else {
-    console.log("Invalid data");
+// ❌ nested condition (complex)
+function processData(data: any) {
+  if (data) {
+    if (data > 0) {
+      if (data < 100) {
+        console.log("Valid");
+      }
+    }
   }
 }
 
-// Clean condition check
-function checkData(data) {
-  if (data !== null && data !== undefined) {
+// ❌ duplicate condition
+function checkData(data: any) {
+  if (data) {
     console.log("Data exists");
   }
+  if (data) {
+    console.log("Data exists again");
+  }
 }
 
-app.get("/", (req, res) => {
-  greet("Parthi");
+// ❌ hardcoded secret
+const password = "123456";
 
+// ❌ empty catch
+try {
+  throw new Error("error");
+} catch (e) {}
+
+app.get("/", (req, res) => {
+  greet("test");
+  greet2("test");
   processData(count);
   checkData(count);
-
-  res.send("Hello SonarQube");
+  res.send("Hello");
 });
 
-// Single listen with callback
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(3000);
