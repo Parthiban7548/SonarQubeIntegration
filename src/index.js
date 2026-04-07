@@ -2,8 +2,8 @@ import express from "express";
 
 const app = express();
 
-let count = 0;
-
+let count test = 0;
+const test_string = "Parthiban"
 function greet(name) {
   console.log(`Hello ${name}`);
 }
