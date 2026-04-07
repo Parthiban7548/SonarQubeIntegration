@@ -1,75 +1,72 @@
-import express from "express";
+import express, { Request, Response } from "express";
 
 const app = express();
 
-// ❌ 1. using var (bad practice)
-var count: any = 0;
 
-// ❌ 2. unused variable
-let unusedVar = "not used";
+let count = 0;
 
-// ❌ 3. duplicate code
-function greet(name: string) {
-  console.log("Hello " + name);
+
+function greet(name) {
+  console.log(`Hello ${name}`);
 }
 
-function greetDuplicate(name: string) {
-  console.log("Hello " + name); // duplicate logic
-}
-
-// ❌ 4. wrong comparison
-if (count == "0") {
+if (count === 0) {
   console.log("Count is zero");
 }
 
-// ❌ 5. nested condition (complexity issue)
-function processData(data: any) {
-  if (data) {
-    if (data > 0) {
-      if (data < 100) {
-        console.log("Valid data");
-      }
-    }
+
+function processData(data) {
+  if (data > 0 && data < 100) {
+    console.log("Valid data");
   }
 }
 
-// ❌ 6. duplicate condition
-function checkData(data: any) {
+
+function checkData(data ) {
   if (data) {
     console.log("Data exists");
   }
-  if (data) {
-    console.log("Data exists again");
-  }
 }
 
-// ❌ 7. hardcoded secret (security issue)
-const password = "123456";
 
-// ❌ 8. empty catch block
+const password = process.env.APP_PASSWORD || "";
+
+
 try {
   throw new Error("Test error");
-} catch (e) {}
+} catch (e) {
+  console.error("Error occurred:", e);
+}
 
-// ❌ 9. function with too many responsibilities
-function bigFunction(data: any) {
+
+function logData(data) {
   console.log(data);
-  if (data) console.log("data exists");
+}
+
+function validateData(data) {
   if (data > 10) console.log("greater");
   if (data < 5) console.log("smaller");
+}
+
+function printNumbers() {
   for (let i = 0; i < 10; i++) {
     console.log(i);
   }
 }
 
+
 app.get("/", (req, res) => {
   greet("Parthi");
-  greetDuplicate("Parthi");
   processData(count);
   checkData(count);
-  bigFunction(count);
+
+  logData(count);
+  validateData(count);
+  printNumbers();
+
   res.send("Hello SonarQube");
 });
+
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
