@@ -2,20 +2,13 @@ import express from "express";
 
 const app = express();
 
-// ❌ using var (bad practice)
-var count = 0;
 
-// ❌ unused variable
-let unusedVar = "I am not used";
 
 // ❌ duplicate function
 function greet(name) {
   console.log("Hello " + name);
 }
 
-function greetDuplicate(name) {
-  console.log("Hello " + name); // duplicate logic
-}
 
 // ❌ bad comparison
 if (count == "0") {
