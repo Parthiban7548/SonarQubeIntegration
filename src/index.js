@@ -1,7 +1,6 @@
 import express from "express";
 
-const app = express();
-
+const app = express();function 
 app.get("/", (req, res) => {
   res.send("Hello SonarQube");
 });
