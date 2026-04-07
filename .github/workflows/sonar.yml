@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
       # Install dependencies
       - name: Install Dependencies
